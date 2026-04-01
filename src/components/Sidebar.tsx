@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import { MonthlySnapshot } from "@/lib/types";
@@ -78,7 +79,7 @@ function SidebarInner() {
     <>
       {/* Mobile top bar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-900 text-white flex items-center justify-between px-4 h-14">
-        <span className="font-bold text-lg">💹 Finfe</span>
+        <Image src="/logo.png" alt="Finfe" width={36} height={36} className="rounded-lg" />
         <button onClick={() => setOpen(!open)} className="p-2">
           {open ? "✕" : "☰"}
         </button>
@@ -98,7 +99,10 @@ function SidebarInner() {
           ${open ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         <div className="p-4 border-b border-slate-700">
-          <div className="font-bold text-xl mb-4 hidden lg:block">💹 Finfe</div>
+          <div className="hidden lg:flex items-center gap-3 mb-4">
+            <Image src="/logo.png" alt="Finfe" width={36} height={36} className="rounded-lg" />
+            <span className="font-bold text-xl">Finfe</span>
+          </div>
 
           {/* Month selector */}
           <div className="space-y-2">

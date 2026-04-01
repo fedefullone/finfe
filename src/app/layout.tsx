@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   description: "Gestión de finanzas personales por cierres mensuales",
   manifest: "/manifest.json",
   themeColor: "#0f172a",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

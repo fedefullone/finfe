@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model MonthlySnapshot {
+  id          String  @id @default(cuid())
+  month       String  @unique
+  inflation   Float
+  mepRate     Float
+  salary      Float
+  otherIncome Float   @default(0)
+
+  pesoAccounts PesoAccount[]
+  usdAccounts  UsdAccount[]
+  debts        Debt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PesoAccount {
+  id         String          @id @default(cuid())
+  name       String
+  amount     Float
+  snapshotId String
+  snapshot   MonthlySnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+}
+
+model UsdAccount {
+  id         String          @id @default(cuid())
+  name       String
+  amount     Float
+  snapshotId String
+  snapshot   MonthlySnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+}
+
+model Debt {
+  id         String          @id @default(cuid())
+  name       String
+  currency   String
+  amount     Float
+  snapshotId String
+  snapshot   MonthlySnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+}
